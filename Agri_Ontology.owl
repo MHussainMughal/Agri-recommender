@@ -1,0 +1,137 @@
+@prefix : <http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture> .
+
+<http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture> rdf:type owl:Ontology ;
+                                                                  rdfs:comment "This ia an ontology of agriculture recommender system"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#Agri_department
+:Agri_department rdf:type owl:Class ;
+                 owl:disjointWith :Pesticides ;
+                 rdfs:comment "Agri department that will tell crop prices and deman"@en .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#Area
+:Area rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#Area_Types
+:Area_Types rdf:type owl:Class ;
+            rdfs:subClassOf :Area ;
+            rdfs:comment "Area that will help us to recognize proper crop"@en .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#Farmer
+:Farmer rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#Fertilizer_Company
+:Fertilizer_Company rdf:type owl:Class ;
+                    rdfs:comment "fertilizer company that will have record related to fertilizer"@en .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#Fertilizer_Price
+:Fertilizer_Price rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                        owl:onProperty owl:topObjectProperty ;
+                                        owl:someValuesFrom :Fertilizer_Company
+                                      ] ;
+                  rdfs:subClassOf :Fertilizer_Type .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#Fertilizer_Type
+:Fertilizer_Type rdf:type owl:Class ;
+                 rdfs:subClassOf :Fertilizers .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#Fertilizers
+:Fertilizers rdf:type owl:Class ;
+             rdfs:subClassOf :Fertilizer_Company .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#Pesticides
+:Pesticides rdf:type owl:Class ;
+            rdfs:subClassOf :pesticide_companies .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#Web_Interface
+:Web_Interface rdf:type owl:Class ;
+               rdfs:comment "web interface where user will interact"@en .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#admin
+:admin rdf:type owl:Class ;
+       rdfs:comment "an admin that manage each and everything on system"@en .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#advisors
+:advisors rdf:type owl:Class ;
+          rdfs:subClassOf :query ;
+          rdfs:comment "advisor that will entertain the query of farmers"@en .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#crop_prices
+:crop_prices rdf:type owl:Class ;
+             rdfs:subClassOf :Agri_department .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#feedback
+:feedback rdf:type owl:Class ;
+          rdfs:subClassOf :Farmer ;
+          rdfs:comment "Feedback of query"@en .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#market_demand
+:market_demand rdf:type owl:Class ;
+               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                     owl:onProperty owl:topObjectProperty ;
+                                     owl:someValuesFrom :crop_prices
+                                   ] ;
+               rdfs:subClassOf :Agri_department .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#pesticide_companies
+:pesticide_companies rdf:type owl:Class ;
+                     rdfs:comment "pesticides companies that will tell to farmer best treatment  of particular disease"@en .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#pesticide_price
+:pesticide_price rdf:type owl:Class ;
+                 rdfs:subClassOf :pesticide_type .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#pesticide_type
+:pesticide_type rdf:type owl:Class ;
+                rdfs:subClassOf :Pesticides .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#query
+:query rdf:type owl:Class ;
+       rdfs:subClassOf :admin ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty owl:topObjectProperty ;
+                         owl:allValuesFrom :query
+                       ] ;
+       rdfs:comment "query written by farmers"@en .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#reply
+:reply rdf:type owl:Class ;
+       rdfs:subClassOf :advisors .
+
+
+###  http://www.semanticweb.org/mkami/ontologies/2022/4/Agriculture#suggestions
+:suggestions rdf:type owl:Class ;
+             rdfs:subClassOf :advisors ;
+             rdfs:comment "suggestion provided by advisor based on farmer query"@en .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
